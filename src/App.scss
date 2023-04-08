@@ -39,10 +39,18 @@
 
 button {
 	cursor: pointer;
+	color: white;
+	background: #04aa6d;
+    outline: none;
+    border: none;
+	&:hover{
+		opacity: 0.95;
+	}
 }
 
 .handle-hover {
 	cursor: pointer;
+	
 }
 
 table {
@@ -64,4 +72,11 @@ tr:nth-child(even) {
 th {
 	background-color: #04AA6D;
 	color           : white;
+}
+.input{
+	margin: 5px 0px 10px 0px;
+	border: none;
+	outline: none;
+	padding: 5px;
+	border-radius: 3px;
 }

@@ -1,26 +1,10 @@
-import { useEffect, useState } from "react"
-import axios from 'axios';
+import * as customize from '../../customize'
+import moment from 'moment'
 export const Covid = () => {
     //componentdidmount
-    let [covid, setCovid] = useState([])
-    let [loading, setLoading] = useState(true)
-    let [err, setErr] = useState(false)
-    useEffect(() => {
-        async function getCovid() {
-            try {
-                let res = await axios.get('https://api.covid19api.com/country/vietnam?from=2021-10-01T00:00:00Z&to=2021-10-20T00:00:00Z')
-                let dataCovid = res?.data || [];
-                setCovid(dataCovid.reverse());
-                setLoading(false)
-                setErr(false)
-            } catch (e) {
-                setErr(true)
-                setLoading(false)
-                console.log(e)
-            }
-        }
-        getCovid()
-    }, [])
+    let today = moment().utc().startOf('day').format('YYYY-MM-DDTHH:mm:ss[Z]')
+    let prevDay = moment.utc(today).subtract(30, 'days').format('YYYY-MM-DDTHH:mm:ss[Z]')
+    let { data: covid, loading, err } = customize.useFetch(`https://api.covid19api.com/country/vietnam?from=${prevDay}&to=${today}`, true)
     return (<><p><strong>Covid-19 tracking in Vietnam</strong></p>
         {loading ? <p>Loading..</p> : <></>}
         {err ? <p>Something went wrong..</p> : <></>}
@@ -38,7 +22,7 @@ export const Covid = () => {
                 {covid?.length > 0 &&
                     covid.map(item => (
                         <tr key={item.ID}>
-                            <td>{item.Date.substr(0, 10)}</td>
+                            <td>{item.Date}</td>
                             <td>{item.Confirmed}</td>
                             <td>{item.Active}</td>
                             <td>{item.Deaths}</td>

@@ -1,0 +1,30 @@
+.yt-result {
+    display: flex;
+    width: 100%;
+    padding: 0 50px;
+    margin: 10px 0;
+
+    .left {
+        width: 40%;
+        margin-left: 20px;
+
+        .iframe-yt {
+            width: 90%;
+            height: 230px;
+        }
+    }
+
+    .right {
+        text-align: left;
+        width: 60%;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+}
